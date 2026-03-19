@@ -1,0 +1,15 @@
+Bienvenidas y bienvenidos a Podcast Accesible, un episodio breve sobre como presentar un proyecto sonoro dentro de una web hecha con React.
+
+La practica no pide piezas sueltas. Pide una experiencia unica: una pagina publica, navegable con teclado y pensada para publico real.
+
+Por eso integramos tres elementos clave en la misma interfaz. Primero, una presentacion clara del proyecto. Segundo, un reproductor de audio accesible. Tercero, la transcripcion completa del episodio.
+
+La promocion tambien debe vivir dentro de la web. En este ejemplo hemos optado por un video incrustado en la propia pagina para evitar sacar a la persona usuaria fuera del flujo.
+
+A nivel de accesibilidad basica trabajamos con estructura semantica, foco visible, contraste suficiente, encabezados ordenados y textos descriptivos.
+
+Tambien conviene comprobar el resultado con Lighthouse y con WAVE, revisar la navegacion solo con teclado y verificar que el audio y el video tengan contexto y alternativas textuales.
+
+Si el proyecto queda publicado en Vercel, Netlify o un hosting equivalente, con repositorio y una URL publica estable, la entrega ya responde al formato que os estan pidiendo.
+
+En resumen: un solo producto final, web en React, podcast integrado, promocion integrada y accesibilidad verificada. Gracias por escuchar.
