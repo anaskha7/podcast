@@ -20,6 +20,10 @@ function addWrappedText(doc, text, x, y, maxWidth, lineHeight = 18) {
   return y + lines.length * lineHeight;
 }
 
+function joinInline(items) {
+  return items.join(". ") + ".";
+}
+
 function blobToDataUrl(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -118,21 +122,21 @@ export async function downloadReportPdf() {
   addParagraph(reportContent.wcag);
 
   addSectionTitle("2. POUR");
-  reportContent.pour.forEach((item) => addParagraph(item));
+  addParagraph(joinInline(reportContent.pour));
 
   addSectionTitle("3. Auditoría inicial");
   addParagraph(
     `En la captura inicial de Lighthouse salen estos resultados. Rendimiento ${auditBaseline.performance} accesibilidad ${auditBaseline.accessibility} buenas prácticas ${auditBaseline.bestPractices} y SEO ${auditBaseline.seo}`
   );
   addParagraph(reportContent.initialAudit);
-  auditBaseline.notes.forEach((item) => addParagraph(item));
+  addParagraph(joinInline(auditBaseline.notes));
   await addImageBlock("Captura de Lighthouse inicial", reportImages.initial);
 
   addSectionTitle("4. Problemas detectados");
-  reportContent.problems.forEach((item) => addParagraph(item));
+  addParagraph(joinInline(reportContent.problems));
 
   addSectionTitle("5. Correcciones aplicadas");
-  reportContent.fixes.forEach((item) => addParagraph(item));
+  addParagraph(joinInline(reportContent.fixes));
 
   addSectionTitle("6. Mejora avanzada");
   addParagraph(reportContent.advancedImprovement);
@@ -150,7 +154,7 @@ export async function downloadReportPdf() {
   } else {
     addParagraph("La auditoría final se actualiza después de la última comprobación de Lighthouse");
   }
-  auditFinal.notes.forEach((item) => addParagraph(item));
+  addParagraph(joinInline(auditFinal.notes));
   await addImageBlock("Captura de Lighthouse final", reportImages.final);
   addParagraph(reportContent.result);
 
