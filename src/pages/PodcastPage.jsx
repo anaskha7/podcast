@@ -1,6 +1,10 @@
 import { chapters, siteMeta, transcript } from "../data/content";
 
 export function PodcastPage() {
+  const youtubeStart = 56 * 60 + 39;
+  const youtubeEnd = 1 * 60 * 60 + 14 * 60 + 51;
+  const youtubeSrc = `https://www.youtube.com/embed/hmYhxFdfNwE?start=${youtubeStart}&end=${youtubeEnd}&rel=0`;
+
   return (
     <div className="page-stack">
       <section className="section-panel page-intro">
@@ -69,24 +73,25 @@ export function PodcastPage() {
       <section className="section-panel">
         <div className="section-heading">
           <p className="eyebrow">Promoción integrada</p>
-          <h2>Vídeo promocional</h2>
+          <h2>Vídeo integrado</h2>
           <p className="section-text">
-            El vídeo se puede ver directamente dentro de la web, sin depender
-            de abrir otra página aparte.
+            Aquí está incrustado el fragmento original en vídeo para que se
+            pueda ver dentro de la web sin salir a otra página.
           </p>
         </div>
 
         <div className="video-card">
-          <video
-            className="video-player"
-            controls
-            preload="metadata"
-            poster={siteMeta.promoPosterSrc}
-            aria-label="Vídeo promocional del podcast"
-          >
-            <source src={siteMeta.promoVideoSrc} type="video/mp4" />
-            Tu navegador no puede reproducir este vídeo.
-          </video>
+          <div className="video-frame">
+            <iframe
+              className="youtube-embed"
+              src={youtubeSrc}
+              title="Vídeo del debate sobre la Copa de África 2025"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
         </div>
       </section>
 
