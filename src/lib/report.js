@@ -45,26 +45,21 @@ export async function downloadReportPdf() {
     y += 10;
   };
 
-  const addBulletList = (items) => {
-    items.forEach((item) => {
-      ensureSpace(52);
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(11);
-      y = addWrappedText(doc, `• ${item}`, margin, y, width, 16);
-      y += 6;
-    });
-  };
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
+  doc.text(siteMeta.author, margin, y);
+  y += 28;
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.text("Informe de accesibilidad y publicación web", margin, y);
-  y += 28;
+  y += 24;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
   y = addWrappedText(
     doc,
-    `Autor: ${siteMeta.author} | Fecha: ${formatDate()} | URL pública: ${siteMeta.publicUrl}`,
+    `Fecha ${formatDate()}   URL pública ${siteMeta.publicUrl}`,
     margin,
     y,
     width,
@@ -85,19 +80,19 @@ export async function downloadReportPdf() {
   addParagraph(reportContent.introduction);
 
   addSectionTitle("2. POUR");
-  addBulletList(reportContent.pour);
+  reportContent.pour.forEach((item) => addParagraph(item));
 
   addSectionTitle("3. Auditoría inicial");
   addParagraph(
-    `Lighthouse inicial: rendimiento ${auditBaseline.performance}, accesibilidad ${auditBaseline.accessibility}, buenas prácticas ${auditBaseline.bestPractices} y SEO ${auditBaseline.seo}.`
+    `En la captura inicial de Lighthouse salen estos resultados. Rendimiento ${auditBaseline.performance} accesibilidad ${auditBaseline.accessibility} buenas prácticas ${auditBaseline.bestPractices} y SEO ${auditBaseline.seo}`
   );
-  addBulletList(auditBaseline.notes);
+  auditBaseline.notes.forEach((item) => addParagraph(item));
 
   addSectionTitle("4. Problemas detectados");
-  addBulletList(reportContent.problems);
+  reportContent.problems.forEach((item) => addParagraph(item));
 
   addSectionTitle("5. Correcciones aplicadas");
-  addBulletList(reportContent.fixes);
+  reportContent.fixes.forEach((item) => addParagraph(item));
 
   addSectionTitle("6. Mejora avanzada");
   addParagraph(reportContent.advancedImprovement);
@@ -110,23 +105,20 @@ export async function downloadReportPdf() {
     auditFinal.seo !== null
   ) {
     addParagraph(
-      `Lighthouse final: rendimiento ${auditFinal.performance}, accesibilidad ${auditFinal.accessibility}, buenas prácticas ${auditFinal.bestPractices} y SEO ${auditFinal.seo}.`
+      `En la captura final de Lighthouse salen estos resultados. Rendimiento ${auditFinal.performance} accesibilidad ${auditFinal.accessibility} buenas prácticas ${auditFinal.bestPractices} y SEO ${auditFinal.seo}`
     );
   } else {
-    addParagraph("La auditoría final se actualiza después de la última comprobación de Lighthouse.");
+    addParagraph("La auditoría final se actualiza después de la última comprobación de Lighthouse");
   }
-  addBulletList(auditFinal.notes);
+  auditFinal.notes.forEach((item) => addParagraph(item));
+  addParagraph(reportContent.result);
 
   addSectionTitle("8. Verificación");
   addParagraph(
-    "La revisión se ha apoyado en Lighthouse y en la comprobación manual de teclado. También se deja preparada la validación con WAVE para revisar encabezados, labels, contraste y lectura estructural de la página."
+    "La revisión la he hecho con Lighthouse y también con comprobación manual de teclado. He mirado que la web se pueda recorrer con TAB que el foco se vea bien y que el formulario explique los errores con texto"
   );
   addParagraph(
-    "La publicación online se ha realizado con Vercel para disponer de una URL pública estable y poder compartir el proyecto final."
+    "La publicación online la he hecho con Vercel para tener una URL pública estable y también he dejado el repositorio en GitHub para que el proyecto se pueda revisar completo"
   );
-
-  addSectionTitle("9. Conclusión");
-  addParagraph(reportContent.conclusion);
-
-  doc.save("informe-accesibilidad-anas-kharbouch.pdf");
+  doc.save("Informe_Anas_Kharbouch.pdf");
 }

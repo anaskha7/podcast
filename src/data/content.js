@@ -46,57 +46,55 @@ export const chapters = [
 ];
 
 export const auditBaseline = {
-  performance: 57,
+  performance: 100,
   accessibility: 100,
-  bestPractices: 92,
+  bestPractices: 77,
   seo: 100,
   notes: [
-    "La web inicial cargaba contenido pesado y tenía margen de mejora en rendimiento.",
-    "La estructura básica ya era correcta, pero faltaban páginas reales y una arquitectura más clara.",
-    "La experiencia no estaba separada en inicio, podcast y contacto."
+    "La primera versión ya funcionaba bien y la base era buena",
+    "Lo que más flojo estaba era buenas prácticas",
+    "Todavía faltaba dejar la web más cerrada y más clara como entrega final"
   ]
 };
 
 export const auditFinal = {
   performance: 100,
   accessibility: 100,
-  bestPractices: 100,
+  bestPractices: 96,
   seo: 100,
   notes: [
-    "La home alcanza 100 en rendimiento, accesibilidad, buenas prácticas y SEO tras la reorganización final.",
-    "La página de contacto también alcanza 100 en accesibilidad gracias a labels, validación por texto y aria-live.",
-    "Se han corregido además detalles de publicación como favicon, robots.txt y sitemap."
+    "La versión final queda más ordenada y más completa",
+    "La página de contacto también queda bien resuelta a nivel de accesibilidad",
+    "Se corrigieron detalles de publicación para dejar la web mejor preparada"
   ]
 };
 
 export const reportContent = {
   introduction:
-    "Este proyecto presenta un podcast sobre la Copa de África 2025 dentro de una web hecha con React. La idea principal ha sido integrar en un solo producto el audio, la promoción en vídeo, la transcripción y una navegación clara para cualquier persona usuaria.",
+    "En esta práctica he montado una web en React sobre un debate de la Copa de África 2025. La idea era que todo estuviera dentro de la misma web y no entregar el audio o el vídeo por separado. Por eso en el proyecto he puesto el podcast el vídeo promocional la transcripción completa y una página de contacto.",
   pour: [
-    "Perceptible: el contenido se presenta con texto claro, contraste suficiente, controles visibles y transcripción del audio.",
-    "Operable: toda la navegación principal y el formulario se pueden usar con teclado y con foco visible.",
-    "Comprensible: cada página tiene una estructura sencilla, títulos claros y mensajes de error escritos con texto.",
-    "Robusto: la web usa HTML semántico, etiquetas asociadas a los campos del formulario y atributos ARIA para mensajes dinámicos."
+    "En la parte perceptible he intentado que el contenido no dependa de una sola forma. El podcast no está solo en audio porque también tiene la transcripción completa y el vídeo se puede ver dentro de la misma web con controles normales.",
+    "En la parte operable me he fijado en que la web se pueda usar con teclado. Se puede mover con TAB entrar en enlaces y botones con ENTER y ver bien el foco en pantalla.",
+    "En la parte comprensible he intentado que el contenido esté ordenado y que se entienda rápido. Cada página tiene su propio título principal y el formulario explica con texto si hay un error.",
+    "En la parte robusta he usado una estructura HTML con sentido. Hay header nav main y footer y también he conectado bien cada label con su campo del formulario."
   ],
   problems: [
-    "La versión anterior estaba concentrada en una sola página y eso no encajaba con el requisito de tener inicio, podcast y contacto.",
-    "Faltaba un formulario accesible con validación explicada por texto.",
-    "No existía un botón dentro de la web para generar y descargar el informe en PDF.",
-    "La navegación y la presentación visual necesitaban una estructura más profesional."
+    "La primera versión funcionaba pero todavía no estaba tan bien cerrada como entrega final y la estructura general se podía mejorar bastante",
+    "Faltaba dejar más clara la separación entre inicio podcast y contacto",
+    "El formulario tenía que quedar mejor resuelto a nivel de accesibilidad con mensajes más claros y campos bien conectados",
+    "También faltaba integrar el informe dentro de la propia web para que se pudiera descargar desde ahí"
   ],
   fixes: [
-    "Se ha creado una estructura de tres páginas con React Router y navegación principal.",
-    "Se ha añadido una página del podcast con reproductor principal, tres capítulos y transcripción completa.",
-    "Se ha añadido una página de contacto con campos obligatorios, labels, mensajes de error y aria-live.",
-    "Se ha implementado la descarga del informe PDF desde la propia app.",
-    "Se ha mejorado la presentación visual para que el resultado sea más serio y más claro."
+    "Rehice la web para que tuviera tres páginas reales y una navegación más clara",
+    "En la página del podcast dejé el episodio completo los tres capítulos el vídeo promocional y la transcripción dentro del mismo sitio",
+    "En la página de contacto añadí nombre email y mensaje con validación por texto y aria live",
+    "También preparé la descarga del informe PDF desde la propia aplicación",
+    "Además limpié mejor el diseño para que la web se viera más seria y más ordenada"
   ],
   advancedImprovement:
-    "La mejora avanzada aplicada es prefers-reduced-motion. Si una persona usuaria tiene activada la reducción de movimiento, la web elimina animaciones y desplazamientos suaves para que la experiencia sea más cómoda.",
+    "Como mejora avanzada he aplicado prefers reduced motion. Esto hace que la web respete la opción de reducir movimiento si una persona la tiene activada en su sistema y así evita animaciones o desplazamientos que puedan molestar.",
   result:
-    "El resultado final es una web publicada con URL pública en Vercel, código en GitHub, podcast integrado, vídeo promocional dentro de la web, transcripción visible, contacto accesible e informe descargable.",
-  conclusion:
-    "La práctica queda resuelta como un único producto final, no como piezas separadas. La web reúne contenido, accesibilidad, publicación online y documentación en un formato coherente."
+    "El resultado final es una web hecha en React donde todo está unido dentro del mismo proyecto. El podcast no va por un lado y el vídeo por otro. La transcripción también está dentro y el formulario forma parte de la web como una página más. Ahora el proyecto incluye la presentación principal el episodio completo los tres capítulos el vídeo promocional la transcripción la página de contacto y el informe descargable en PDF. Además está publicado online y tiene una URL pública estable. La diferencia con la primera versión es que ahora sí parece una entrega final y en general creo que cumple bien con lo que se pedía porque no son piezas separadas sino una sola web con todo integrado y mejor presentado."
 };
 
 export const transcript = [
