@@ -1,4 +1,10 @@
-import { auditBaseline, auditFinal, reportContent, siteMeta } from "../data/content";
+import {
+  auditBaseline,
+  auditFinal,
+  reportContent,
+  reportImages,
+  siteMeta
+} from "../data/content";
 
 function formatDate() {
   return new Intl.DateTimeFormat("es-ES", {
@@ -12,6 +18,15 @@ function addWrappedText(doc, text, x, y, maxWidth, lineHeight = 18) {
   const lines = doc.splitTextToSize(text, maxWidth);
   doc.text(lines, x, y);
   return y + lines.length * lineHeight;
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 }
 
 export async function downloadReportPdf() {
@@ -45,6 +60,28 @@ export async function downloadReportPdf() {
     y += 10;
   };
 
+  const addImageBlock = async (label, src) => {
+    try {
+      const response = await fetch(src);
+      const blob = await response.blob();
+      const dataUrl = await blobToDataUrl(blob);
+      const properties = doc.getImageProperties(dataUrl);
+      const imageWidth = width;
+      const imageHeight = (properties.height * imageWidth) / properties.width;
+
+      ensureSpace(imageHeight + 52);
+      doc.addImage(dataUrl, "PNG", margin, y, imageWidth, imageHeight);
+      y += imageHeight + 16;
+
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(10);
+      y = addWrappedText(doc, label, margin, y, width, 14);
+      y += 10;
+    } catch {
+      addParagraph(`No se ha podido cargar la imagen: ${label}`);
+    }
+  };
+
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
   doc.text(siteMeta.author, margin, y);
@@ -52,7 +89,7 @@ export async function downloadReportPdf() {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
-  doc.text("Informe de accesibilidad y publicación web", margin, y);
+  doc.text("Informe de Auditoría de Accesibilidad Web", margin, y);
   y += 24;
 
   doc.setFont("helvetica", "normal");
@@ -78,6 +115,7 @@ export async function downloadReportPdf() {
 
   addSectionTitle("1. Introducción");
   addParagraph(reportContent.introduction);
+  addParagraph(reportContent.wcag);
 
   addSectionTitle("2. POUR");
   reportContent.pour.forEach((item) => addParagraph(item));
@@ -86,7 +124,9 @@ export async function downloadReportPdf() {
   addParagraph(
     `En la captura inicial de Lighthouse salen estos resultados. Rendimiento ${auditBaseline.performance} accesibilidad ${auditBaseline.accessibility} buenas prácticas ${auditBaseline.bestPractices} y SEO ${auditBaseline.seo}`
   );
+  addParagraph(reportContent.initialAudit);
   auditBaseline.notes.forEach((item) => addParagraph(item));
+  await addImageBlock("Captura de Lighthouse inicial", reportImages.initial);
 
   addSectionTitle("4. Problemas detectados");
   reportContent.problems.forEach((item) => addParagraph(item));
@@ -111,6 +151,7 @@ export async function downloadReportPdf() {
     addParagraph("La auditoría final se actualiza después de la última comprobación de Lighthouse");
   }
   auditFinal.notes.forEach((item) => addParagraph(item));
+  await addImageBlock("Captura de Lighthouse final", reportImages.final);
   addParagraph(reportContent.result);
 
   addSectionTitle("8. Verificación");
@@ -120,5 +161,7 @@ export async function downloadReportPdf() {
   addParagraph(
     "La publicación online la he hecho con Vercel para tener una URL pública estable y también he dejado el repositorio en GitHub para que el proyecto se pueda revisar completo"
   );
+  addSectionTitle("9. Conclusión");
+  addParagraph(reportContent.conclusion);
   doc.save("Informe_Anas_Kharbouch.pdf");
 }

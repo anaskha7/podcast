@@ -9,6 +9,11 @@ export const siteMeta = {
   promoPosterSrc: "/media/promo-poster.png"
 };
 
+export const reportImages = {
+  initial: "/report/lighthouse-inicial.png",
+  final: "/report/lighthouse-final.png"
+};
+
 export const projectOverview = [
   {
     title: "Podcast integrado",
@@ -72,29 +77,38 @@ export const auditFinal = {
 export const reportContent = {
   introduction:
     "En esta práctica he montado una web en React sobre un debate de la Copa de África 2025. La idea era que todo estuviera dentro de la misma web y no entregar el audio o el vídeo por separado. Por eso en el proyecto he puesto el podcast el vídeo promocional la transcripción completa y una página de contacto.",
+  wcag:
+    "La referencia que he seguido ha sido WCAG 2.2 nivel AA porque es el nivel que se suele pedir como base en una web accesible. A partir de ahí he revisado estructura navegación con teclado foco visible formulario y claridad general del contenido.",
   pour: [
     "En la parte perceptible he intentado que el contenido no dependa de una sola forma. El podcast no está solo en audio porque también tiene la transcripción completa y el vídeo se puede ver dentro de la misma web con controles normales.",
     "En la parte operable me he fijado en que la web se pueda usar con teclado. Se puede mover con TAB entrar en enlaces y botones con ENTER y ver bien el foco en pantalla.",
     "En la parte comprensible he intentado que el contenido esté ordenado y que se entienda rápido. Cada página tiene su propio título principal y el formulario explica con texto si hay un error.",
     "En la parte robusta he usado una estructura HTML con sentido. Hay header nav main y footer y también he conectado bien cada label con su campo del formulario."
   ],
+  initialAudit:
+    "La captura inicial de Lighthouse daba una nota alta en accesibilidad pero eso no quería decir que la práctica ya estuviera bien resuelta. La parte automática salía bien en esa prueba pero cuando revisé la web con más detalle y la comparé con lo que pedía la práctica vi que todavía faltaban cosas importantes.",
   problems: [
-    "La primera versión funcionaba pero todavía no estaba tan bien cerrada como entrega final y la estructura general se podía mejorar bastante",
-    "Faltaba dejar más clara la separación entre inicio podcast y contacto",
-    "El formulario tenía que quedar mejor resuelto a nivel de accesibilidad con mensajes más claros y campos bien conectados",
-    "También faltaba integrar el informe dentro de la propia web para que se pudiera descargar desde ahí"
+    "La web estaba demasiado concentrada en una sola página y faltaba separar mejor inicio podcast y contacto",
+    "No había una página de contacto completa con labels validación por texto y aria live",
+    "Faltaba el informe PDF generado desde la propia web",
+    "No estaba aplicada la mejora avanzada de prefers reduced motion",
+    "La revisión manual mostró que todavía había margen para dejar mejor la navegación con teclado y la presentación de los contenidos"
   ],
   fixes: [
     "Rehice la web para que tuviera tres páginas reales y una navegación más clara",
     "En la página del podcast dejé el episodio completo los tres capítulos el vídeo promocional y la transcripción dentro del mismo sitio",
     "En la página de contacto añadí nombre email y mensaje con validación por texto y aria live",
     "También preparé la descarga del informe PDF desde la propia aplicación",
+    "Añadí el enlace para saltar al contenido el foco visible y la mejora de prefers reduced motion",
     "Además limpié mejor el diseño para que la web se viera más seria y más ordenada"
   ],
   advancedImprovement:
     "Como mejora avanzada he aplicado prefers reduced motion. Esto hace que la web respete la opción de reducir movimiento si una persona la tiene activada en su sistema y así evita animaciones o desplazamientos que puedan molestar.",
   result:
     "El resultado final es una web hecha en React donde todo está unido dentro del mismo proyecto. El podcast no va por un lado y el vídeo por otro. La transcripción también está dentro y el formulario forma parte de la web como una página más. Ahora el proyecto incluye la presentación principal el episodio completo los tres capítulos el vídeo promocional la transcripción la página de contacto y el informe descargable en PDF. Además está publicado online y tiene una URL pública estable. La diferencia con la primera versión es que ahora sí parece una entrega final y en general creo que cumple bien con lo que se pedía porque no son piezas separadas sino una sola web con todo integrado y mejor presentado."
+    ,
+  conclusion:
+    "En general el cambio más importante no ha sido solo la nota final sino haber convertido una versión inicial bastante simple en una web más completa más clara y más alineada con WCAG 2.2 nivel AA y con los requisitos de la práctica."
 };
 
 export const transcript = [
